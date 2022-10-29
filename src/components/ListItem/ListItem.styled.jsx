@@ -14,6 +14,8 @@ export const TextName = styled.p`
 
 export const Button = styled.button`
   cursor: pointer;  
+  width: 32px;
+  height: 32px;
   border-radius: ${props => props.theme.radii.round};
   border: none;
   padding: ${props => props.theme.space[3]}px;

@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import { Label, Input, Button, ErrorText } from './Form.styled';
 import { Box } from '../Box/Box';
 import { nanoid } from 'nanoid'
@@ -26,47 +25,47 @@ const FormError = ({ name }) => {
   );
 };
 
-export class FormContacts extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export function FormContacts ({onSubmit}) {
 
-  nameInputId = nanoid();
-  telInputId = nanoid();
+  const nameInputId = nanoid();
+  const telInputId = nanoid();
 
-   handleSubmit = (values, {resetForm}) => {
-    this.props.onSubmit({ ...values });
+  const handleSubmit = (values, {resetForm}) => {
+     const newContact = {
+      id: nanoid(),
+      name: values.name,
+      number: values.number,
+    };
+    onSubmit(newContact);
     resetForm();
   };
 
-  render() {
     return (
     <Formik
-        initialValues={this.state}
+        initialValues={{ name: '', number: '' }}
         validationSchema={schema}
-        onSubmit={this.handleSubmit} 
+        onSubmit={handleSubmit} 
       >
       <Box display='flex' flexDirection='column' maxWidth={500} mx='auto'>
         <Form autoComplete='off'>
-          <Label htmlFor={this.nameInputId}>
+          <Label htmlFor={nameInputId}>
           Name
             <Input
             type="text"
             name="name"
             required
-            id={this.nameInputId}
+            id={nameInputId}
             placeholder="Rosie Simpson"
               />
               <FormError name="name"/>
           </Label>
-          <Label htmlFor={this.telInputId}>
+          <Label htmlFor={telInputId}>
           Number
             <Input 
             type="tel"
             name="number"
             required
-            id={this.telInputId}
+            id={telInputId}
             placeholder="+380675557777"
               />
             <FormError name="number"/>
@@ -77,7 +76,7 @@ export class FormContacts extends Component {
     </Formik>
     );
   }
-}
+
 
 
 
