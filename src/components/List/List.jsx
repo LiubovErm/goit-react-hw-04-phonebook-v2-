@@ -8,16 +8,17 @@ export const List = ({ contacts, onDeleteContact }) => {
         {contacts.map(({ id, name, number }) => (
           <ListItem 
             key={id}
+            id={id}
             name={name}
             number={number}
-            onClickRemove={() => onDeleteContact(id)}
+            onDeleteContact={onDeleteContact}
           />
         ))}
     </ContactList>
   )
 }
 
-ContactList.propTypes = {
+List.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -31,28 +32,3 @@ ContactList.propTypes = {
 
 
 
-
-
-// export const List = ({ contacts, onDeleteContact }) => (
-//     <ContactList>
-//       {contacts.map(({ id, name, number }) => (
-//           <ContactItem key={id}>
-//             {name}: {number}
-//             <Button type = "button" onClick={() => {onDeleteContact(id)}}>
-//               Delete
-//             </Button>
-//           </ContactItem>
-//       ))}
-//     </ContactList>
-// );
-
-// List.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onDeleteContact: PropTypes.func.isRequired,
-// };
